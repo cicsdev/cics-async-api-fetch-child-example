@@ -1,15 +1,15 @@
 # How to use the CICS Asynchronous API Commands
 
-In [an earlier article][prad] Prad introduced the new asynchronous API commands in the
-CICS TS 5.4 Open Beta. In this article we're going to get straight down to business: we'll
-develop a very simple pair of programs to demonstrate the passing of information from a
-parent to a child program using the new functionality. The full source code of these
-programs can be found [in a GitHub repository][github] for you to take and get up and
-running quickly.
+In [an earlier article][prad], Prad introduced the new asynchronous API commands
+available in the CICS TS 5.4 Open Beta. In this article we're going to get straight down
+to business: we'll develop a very simple pair of programs to demonstrate the passing of
+information from a parent to a child program using the new functionality. The full source
+code for these programs is [in a GitHub repository][github] for you to get up and running
+quickly.
 
-The example---written in C---is very simple. The parent reads an integer from a CICS
-terminal screen, and passes this value to its child. The child---running asynchronously
-with the parent---takes this value and increments it by 1, before passing it back to the
+The example, written in C, is very simple. The parent reads an integer from a CICS
+terminal screen, and passes this value to its child. The child (running asynchronously
+with the parent) takes this value and increments it by 1, before passing it back to the
 parent. To show this working, we'll print various statements. I've defined the following
 resources in my CICS region's CSD:
 
@@ -20,18 +20,18 @@ resources in my CICS region's CSD:
     DEFINE TRANSACTION(ASCH) GROUP(ASYNC) PROGRAM(ASCHILD)
 
 A basic principle of this kind of concurrency model is that we should treat the different
-computational "things" in the system as discrete systems that have their own non-shared
-memory, and communicate by passing messages. This type of model is the subject of a
-future article, but for now we can know that it means we should be able to write the
-parent and child programs separately, as long as we agree on the interfaces. We'll first
-create the parent program, and then the child program.
+computational entities in the system as discrete systems that have their own non-shared
+memory, and communicate by passing messages. This type of model will be the subject of a
+future article, but for now all we need to know is that it means we can write the parent
+and child programs separately, as long as we agree on the interfaces. We'll start with
+the parent program, and then the child program.
 
 ## The Parent Program
 
-Since this example is highlighting the two new APIs, I'll skip over the screen reading
-parts of the program. We just need to assume that when we invoke the parent program by
-running a transaction from a CICS terminal, we'll also pass the name of the child
-transaction to run, as well as an integer. We'll start with a struct to store this
+Since this example is highlighting the two new API commands, I'll skip over the screen
+reading parts of the program. We just need to assume that when we invoke the parent
+program by running a transaction from a CICS terminal, we'll also pass the name of the
+child transaction to run, as well as an integer. We'll start with a struct to store this
 integer (which we pull from the screen input):
 
     struct container {
@@ -59,14 +59,14 @@ new functionality:
 Here, `input.child` is the name of the child transaction, read from the screen. For
 example, `ASCH`. The `CHILD` parameter specifies an output field for CICS to store a
 child token. Much like for channel names, this is a variable of length `char[16]`. We
-also specify a channel name as the way to pass information to the child program. It's
-interesting to note that here, CICS makes a copy of this channel, and sends that. That
-way, the parent is free to keep making changes in its channel, and there's no name
-confusion.
+also specify a channel name as the way to pass information to the child program. Note
+that here CICS makes a copy of the channel, and sends that rather than the original
+channel. This way, the parent is free to keep making changes in its channel, and there's
+no name confusion.
 
 The `EXEC CICS RUN TRANSID` command is non-blocking, so the parent is free to continue
-with any other logic it wants, while the child program does its own processing. At the
-parent program's convenience, it can fetch the results from the child:
+with other logic while the child program does its own processing. At the parent program's
+convenience, it can fetch the results from the child:
 
     EXEC CICS FETCH CHILD(child)
                     ABCODE(abcode)
