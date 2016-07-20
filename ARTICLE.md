@@ -130,23 +130,23 @@ send it back to the parent:
                   FROM(&numCon) FLENGTH(len_numCon) BIT
                   RESP(response) RESP2(reason);
 
-  And that's all there is to it. The important bit is that you can treat the child as a
-  unit of its own. As long as the interfaces stay the same, the implementation of the
-  child can change and the parent doesn't need to know or care.
+And that's all there is to it. The important bit is that you can treat the child as a
+unit of its own. As long as the interfaces stay the same, the implementation of the child
+can change and the parent doesn't need to know or care.
 
 ## Running the Programs
 
 If we compile these programs, we can start the parent from a CICS terminal by invoking
 its transaction:
 
-      ASPA ASCH 9
+    ASPA ASCH 9
 
 Since we used `printf`, the output will be written to `CEEOUT` for the region running
 these programs. Checking there, we see the following messages printed:
 
-      ASPARENT: sending 9
-      ASCHILD:  incremented number
-      ASPARENT: received 10
+    ASPARENT: sending 9
+    ASCHILD:  incremented number
+    ASPARENT: received 10
 
 Which shows that it worked! The parent set the value of its integer to 9
 initially (from terminal input), and passed it to the child. The child read this
