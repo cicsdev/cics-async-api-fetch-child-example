@@ -1,7 +1,8 @@
 # CICS Asynchronous API Fetch Child Example
 
-This project is a very basic example demonstrating the passing of information
-from a parent to a child program using the CICS Asynchronous API, written in C.
+This project is a very basic example demonstrating the passing of information from a
+parent to a child program using the CICS Asynchronous API, written in C. A longer form
+description of the example can be found on the [CICS Developer Center][cicsdev].
 
 ## Overview
 
@@ -38,3 +39,5 @@ messages printed:
 ## License
 
 This project is licensed under [Apache License Version 2.0](LICENSE).
+
+[cicsdev]: https://developer.ibm.com/cics/2016/07/25/how-to-use-the-cics-asynchronous-api-commands/
