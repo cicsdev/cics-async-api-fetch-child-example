@@ -159,6 +159,6 @@ this example, and you can read more about these APIs in the
 [CICS TS Knowledge Center][kc].
 
 
-[prad]: http://developer.ibm.com/cics
+[prad]: https://developer.ibm.com/cics/2016/07/22/introducing-asynchronous-api/
 [github]: https://github.com/cicsdev/cics-async-api-fetch-child-example
 [kc]: https://www.ibm.com/support/knowledgecenter/SSGMCP_5.4.0/fundamentals/asynchronous/async-api.html?pos=2
