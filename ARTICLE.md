@@ -26,6 +26,8 @@ future article, but for now all we need to know is that it means we can write th
 and child programs separately, as long as we agree on the interfaces. We'll start with
 the parent program, and then the child program.
 
+![Diagram showing the parent and child programs, and their interaction.](diagram.png)
+
 ## The Parent Program
 
 Since this example is highlighting the two new API commands, I'll skip over the screen
