@@ -80,7 +80,7 @@ The `FETCH` command will block until the child has completed: either normally, o
 abend. Once control is given back to the parent program, it can be sure that the child
 has completed. `child` is an input field: just specify the variable you used on the
 corresponding `RUN`. We can collect the abend code (if there is one; blanks if not), and
-the completion station of the child (stored in a `long`). The `CHANNEL` parameter
+the completion status of the child (stored in a `long`). The `CHANNEL` parameter
 specifies an output field here: this is to ensure we don't clobber over an existing
 channel that the parent is using.
 
