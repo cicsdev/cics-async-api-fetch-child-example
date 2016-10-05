@@ -55,7 +55,7 @@ The name of both the container and its channel is arbitrary. As this is C, don't
 that the `FROM` parameter wants the _address_ of the struct in memory. Now, here's some
 new functionality:
 
-    EXEC CICS RUN TRANSID(input.child) ASYNCHRONOUS CHILD(child)
+    EXEC CICS RUN TRANSID(input.child) CHILD(child)
               CHANNEL("AS") RESP(response) RESP2(reason);
 
 Here, `input.child` is the name of the child transaction, read from the screen. For

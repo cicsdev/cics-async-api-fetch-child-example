@@ -64,7 +64,7 @@ void main()
      will copy the channel before passing it to the child, so it can
      still be used by the parent. */
 
-  EXEC CICS RUN TRANSID(input.child) ASYNCHRONOUS CHILD(child)
+  EXEC CICS RUN TRANSID(input.child) CHILD(child)
             CHANNEL("AS") RESP(response) RESP2(reason);
 
   if (response != 0) {
